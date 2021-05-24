@@ -140,12 +140,12 @@
       this[globalName] = mainExports;
     }
   }
-})({"68WUB":[function(require,module,exports) {
+})({"3DFBo":[function(require,module,exports) {
 var HMR_HOST = null;
 var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d751713988987e9331980363e24189ce";
-module.bundle.HMR_BUNDLE_ID = "f9eab60bc3a7a7c3f683683702675e63";
+module.bundle.HMR_BUNDLE_ID = "21f25aef5758eca6d4fd36b83e278227";
 // @flow
 /*global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE*/
 /*::
@@ -481,7 +481,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","react-dom":"2sg1U","./index.scss":"5iJih","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya","./components/main-view/main-view":"67PhB"}],"3b2NM":[function(require,module,exports) {
+},{"react":"3b2NM","react-dom":"2sg1U","./components/main-view/main-view":"67PhB","./index.scss":"5iJih","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya"}],"3b2NM":[function(require,module,exports) {
 "use strict";
 if ("development" === 'production') {
   module.exports = require('./cjs/react.production.min.js');
@@ -25674,7 +25674,145 @@ if ("development" !== "production") {
   })();
 }
 
-},{}],"5iJih":[function() {},{}],"2eEfY":[function(require,module,exports) {
+},{}],"67PhB":[function(require,module,exports) {
+var helpers = require("../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  var _react = require('react');
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _movieCardMovieCard = require('../movie-card/movie-card');
+  var _movieViewMovieView = require('../movie-view/movie-view');
+  var _jsxFileName = "/Users/juanrodelo/careerfoundry/movie_api/myFlix-client/src/components/main-view/main-view.jsx";
+  // create the component using the react template and export it to make it available
+  class MainView extends _reactDefault.default.Component {
+    // method used to create the component. It holds the component before rendering. The place to initialize a state’s values.
+    constructor() {
+      // calls the constructor of the parent class. Need to call super if they are subclasses.
+      super();
+      this.state = {
+        movies: [{
+          _id: 1,
+          Title: 'Arrival',
+          Description: 'Arrival is a 2016 American science fiction drama film directed by Denis Villeneuve and written by Eric Heisserer. ... The film follows a linguist enlisted by the United States Army to discover how to communicate with extraterrestrial aliens who have arrived on Earth, before tensions lead to war',
+          ImagePath: 'https://s.studiobinder.com/wp-content/uploads/2010/03/Arrival-Video-Essay-How-to-Balance-Fear-and-Intrigue-WP.jpg'
+        }, {
+          _id: 2,
+          Title: '2001 a Space Odyssey',
+          Description: 'After discovering a monolith on the lunar surface, the Discovery One and its revolutionary supercomputer set out to unravel its mysterious origin',
+          ImagePath: 'https://www.heraldnet.com/wp-content/uploads/2018/06/12307525_web1_TSR-2001-edh-180614.jpg'
+        }, {
+          _id: 3,
+          Title: 'Stalker',
+          Description: 'In an unnamed country at an unspecified time, there is a fiercely protected post-apocalyptic wasteland known as The Zone. An illegal guide (Aleksandr Kajdanovsky), whose mutant child suggests unspeakable horrors within The Zone, leads a writer (Anatoliy Solonitsyn) and a scientist (Nikolay Grinko) into the heart of the devastation in search of a mythical place known only as The Room. Anyone who enters The Room will supposedly have any of his earthly desires immediately fulfilled',
+          ImagePath: 'https://miro.medium.com/max/2732/1*Ls0EtYDed-4kypPOufMhBA.jpeg'
+        }],
+        // The UI is a function of its state that now is null.
+        selectedMovie: null
+      };
+    }
+    setSelectedMovie = newSelectedMovie => {
+      this.setState({
+        selectedMovie: newSelectedMovie
+      });
+    };
+    render() {
+      const {movies, selectedMovie} = this.state;
+      if (movies.length === 0) return (
+        /*#__PURE__*/_reactDefault.default.createElement("div", {
+          className: "main-view",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 32,
+            columnNumber: 37
+          }
+        }, "The list is empty!")
+      );
+      return (
+        /*#__PURE__*/_reactDefault.default.createElement("div", {
+          className: "main-view",
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 35,
+            columnNumber: 7
+          }
+        }, selectedMovie ? /*#__PURE__*/_reactDefault.default.createElement(_movieViewMovieView.MovieView, {
+          movie: selectedMovie,
+          onBackClick: this.setSelectedMovie,
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 37,
+            columnNumber: 13
+          }
+        }) : movies.map(movie => /*#__PURE__*/_reactDefault.default.createElement(_movieCardMovieCard.MovieCard, {
+          key: movie._id,
+          movie: movie,
+          onMovieClick: movie => {
+            this.setSelectedMovie(movie);
+          },
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 39,
+            columnNumber: 13
+          }
+        })))
+      );
+    }
+  }
+  exports.default = MainView;
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","../movie-card/movie-card":"7v6h3","../movie-view/movie-view":"3xBbr","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya"}],"7v6h3":[function(require,module,exports) {
+var helpers = require("../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "MovieCard", function () {
+    return MovieCard;
+  });
+  var _react = require('react');
+  var _reactDefault = _parcelHelpers.interopDefault(_react);
+  var _jsxFileName = "/Users/juanrodelo/careerfoundry/movie_api/myFlix-client/src/components/movie-card/movie-card.jsx";
+  class MovieCard extends _reactDefault.default.Component {
+    render() {
+      const {movie, onMovieClick} = this.props;
+      return (
+        /*#__PURE__*/_reactDefault.default.createElement("div", {
+          className: "movie-card",
+          onClick: () => {
+            onMovieClick(movie);
+          },
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 6,
+            columnNumber: 12
+          }
+        }, movie.Title)
+      );
+    }
+  }
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya"}],"2eEfY":[function(require,module,exports) {
 "use strict";
 
 exports.interopDefault = function (a) {
@@ -26462,148 +26600,7 @@ if ("development" !== "production") {
   })();
 }
 
-},{}],"67PhB":[function(require,module,exports) {
-var helpers = require("../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-try {
-  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-  _parcelHelpers.defineInteropFlag(exports);
-  var _react = require('react');
-  var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _movieCardMovieCard = require('../movie-card/movie-card');
-  var _movieViewMovieView = require('../movie-view/movie-view');
-  var _jsxFileName = "/Users/juanrodelo/careerfoundry/movie_api/myFlix-client/src/components/main-view/main-view.jsx";
-  // create the component using the react template and export it to make it available
-  class MainView extends _reactDefault.default.Component {
-    // method used to create the component. It holds the component before rendering
-    constructor() {
-      // calls the constructor of the parent class. Need to call super if they are subclasses.
-      super();
-      this.state = {
-        movies: [{
-          _id: 1,
-          Title: 'Inception',
-          Description: 'desc1...',
-          ImagePath: '...'
-        }, {
-          _id: 2,
-          Title: 'The Shawshank Redemption',
-          Description: 'desc2...',
-          ImagePath: '...'
-        }, {
-          _id: 3,
-          Title: 'Gladiator',
-          Description: 'desc3...',
-          ImagePath: '...'
-        }],
-        selectedMovie: null
-      };
-    }
-    setSelectedMovie(newSelectedMovie) {
-      this.setState({
-        selectedMovie: newSelectedMovie
-      });
-    }
-    render() {
-      const {movies, selectedMovie} = this.state;
-      if (selectedMovie) return (
-        /*#__PURE__*/_reactDefault.default.createElement(_movieViewMovieView.MovieView, {
-          movie: selectedMovie,
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 30,
-            columnNumber: 31
-          }
-        })
-      );
-      if (!movies.length) return (
-        /*#__PURE__*/_reactDefault.default.createElement("div", {
-          className: "main-view",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 31,
-            columnNumber: 32
-          }
-        }, "The list is empty!")
-      );
-      return (
-        /*#__PURE__*/_reactDefault.default.createElement("div", {
-          className: "main-view",
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 33,
-            columnNumber: 7
-          }
-        }, movies.map(movieData => /*#__PURE__*/_reactDefault.default.createElement(_movieCardMovieCard.MovieCard, {
-          key: movieData._id,
-          movie: movieData,
-          onMovieClick: newSelectedMovie => {
-            this.setState({
-              selectedMovie: newSelectedMovie
-            });
-          },
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 35,
-            columnNumber: 11
-          }
-        })))
-      );
-    }
-  }
-  exports.default = MainView;
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-
-},{"react":"3b2NM","../movie-card/movie-card":"7v6h3","../movie-view/movie-view":"3xBbr","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya"}],"7v6h3":[function(require,module,exports) {
-var helpers = require("../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-try {
-  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-  _parcelHelpers.defineInteropFlag(exports);
-  _parcelHelpers.export(exports, "MovieCard", function () {
-    return MovieCard;
-  });
-  var _react = require('react');
-  var _reactDefault = _parcelHelpers.interopDefault(_react);
-  var _jsxFileName = "/Users/juanrodelo/careerfoundry/movie_api/myFlix-client/src/components/movie-card/movie-card.jsx";
-  class MovieCard extends _reactDefault.default.Component {
-    render() {
-      const {movie, onMovieClick} = this.props;
-      return (
-        /*#__PURE__*/_reactDefault.default.createElement("div", {
-          className: "movie-card",
-          onClick: () => {
-            onMovieClick(movie);
-          },
-          __self: this,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 6,
-            columnNumber: 12
-          }
-        }, movie.Title)
-      );
-    }
-  }
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya"}],"3xBbr":[function(require,module,exports) {
+},{}],"3xBbr":[function(require,module,exports) {
 var helpers = require("../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -26619,7 +26616,7 @@ try {
   var _jsxFileName = "/Users/juanrodelo/careerfoundry/movie_api/myFlix-client/src/components/movie-view/movie-view.jsx";
   class MovieView extends _reactDefault.default.Component {
     render() {
-      const {movie} = this.props;
+      const {movie, onBackClick} = this.props;
       return (
         /*#__PURE__*/_reactDefault.default.createElement("div", {
           className: "movie-view",
@@ -26693,7 +26690,19 @@ try {
             lineNumber: 18,
             columnNumber: 11
           }
-        }, movie.Description)))
+        }, movie.Description)), /*#__PURE__*/_reactDefault.default.createElement("button", {
+          onClick: e => {
+            console.log(e);
+            e.preventDefault();
+            onBackClick(null);
+          },
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 20,
+            columnNumber: 9
+          }
+        }, "Back"))
       );
     }
   }
@@ -26703,6 +26712,6 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya"}]},["68WUB","1DVjT"], "1DVjT", "parcelRequire279c")
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"2eEfY","../../../../../../.nvm/versions/node/v14.16.0/lib/node_modules/parcel/node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1BLya"}],"5iJih":[function() {},{}]},["3DFBo","1DVjT"], "1DVjT", "parcelRequire279c")
 
-//# sourceMappingURL=index.02675e63.js.map
+//# sourceMappingURL=index.3e278227.js.map
