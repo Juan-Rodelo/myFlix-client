@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Juan-Rodelo/myFlix-client/issues"
   },
-  "homepage": "https://github.com/Juan-Rodelo/myFlix-client#readme"
+  "homepage": "https://github.com/Juan-Rodelo/myFlix-client#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.0-beta.2"
+  }
 }
