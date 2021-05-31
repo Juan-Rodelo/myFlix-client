@@ -35,6 +35,8 @@ export function RegistrationView(props) {
       </label>
       <span>
         <button type="submit" onClick={handleSubmit}>Submit</button>
+        <button type="secondary" onClick={props.toggleRegisterProperty}>Login</button>
+
       </span>
     </form>
   )
