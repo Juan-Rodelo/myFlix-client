@@ -7,6 +7,8 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import config from '../../config';
+
 
 
 
@@ -26,7 +28,8 @@ class MainView extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://movies87.herokuapp.com/movies')
+    // axios.get('https://movies87.herokuapp.com/movies')
+    axios.get(`${config.API_URL}/movies`)
       .then(response => {
         this.setState({
           movies: response.data
@@ -43,11 +46,22 @@ class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user
+      user: authData.user.Username
     });
+
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
   }
+
+  // onLoggedIn(user) {
+  //   this.setState({
+  //     user
+  //   });
+  // }
 
   onRegister(register) {
     this.setState({
