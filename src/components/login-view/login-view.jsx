@@ -8,29 +8,29 @@ export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // const handleSubmit = (e) => {
-  //   //prevents refresh/reload,
-  //   e.preventDefault();
-  //   axios.post(`${config.API_URL}/login`, {
-  //     Username: username,
-  //     Password: password
-  //   })
-  //     .then(response => {
-  //       const data = response.data;
-  //       props.onLoggedIn(data);
-  //     })
-  //     .catch(e => {
-  //       console.log('no such user')
-  //     });
-  // };
-
-
   const handleSubmit = (e) => {
     //prevents refresh/reload,
     e.preventDefault();
-    console.log(username, password);
-    props.onLoggedIn(username);
-  }
+    axios.post(`${config.API_URL}/login`, {
+      Username: username,
+      Password: password
+    })
+      .then(response => {
+        const data = response.data;
+        props.onLoggedIn(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
+  };
+
+  //old submit
+  // const handleSubmit = (e) => {
+  //   //prevents refresh/reload,
+  //   e.preventDefault();
+  //   console.log(username, password);
+  //   props.onLoggedIn(username);
+  // }
 
   return (
     <form>
