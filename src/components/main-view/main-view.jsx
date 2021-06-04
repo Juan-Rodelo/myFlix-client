@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -28,14 +29,56 @@ class MainView extends React.Component {
   }
 
   componentDidMount() {
-    // axios.get('https://movies87.herokuapp.com/movies')
-    axios.get(`${config.API_URL}/movies`)
+    // axios.get(`${config.API_URL}/movies`)
+    //   .then(response => {
+    //     this.setState({
+    //       movies: response.data
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+    }
+
+  }
+
+  onLoggedIn(authData) {
+    console.log(authData);
+    //This updates the state with the logged in authData
+    this.setState({
+      user: authData.user.Username
+    });
+    //auth information is stored locally
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    //gets the movies from your API once the user is logged in.
+    //this refers to the object itself, in this case, the MainView class.
+    this.getMovies(authData.token);
+  }
+
+  signOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null
+    });
+  }
+
+
+  getMovies(token) {
+    axios.get(`${config.API_URL}/movies`, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => {
         this.setState({
           movies: response.data
         });
       })
-      .catch(error => {
+      .catch(function (error) {
         console.log(error);
       });
   }
@@ -46,16 +89,6 @@ class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(authData) {
-    console.log(authData);
-    this.setState({
-      user: authData.user.Username
-    });
-
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
-  }
 
   // onLoggedIn(user) {
   //   this.setState({
@@ -95,21 +128,24 @@ class MainView extends React.Component {
     if (this.state.user === null) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} toggleRegister={this.toggleRegister} />;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie
-          ?
-          <Col md={8}>
-            <MovieView movie={selectedMovie} onBackClick={this.setSelectedMovie} />
-          </Col>
-          :
-          movies.map(movie => (
-            <Col md={3}>
-              <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie); }} />
+      <Router>
+        <Row className="main-view justify-content-md-center">
+          {selectedMovie
+            ?
+            <Col md={8}>
+              <MovieView movie={selectedMovie} onBackClick={this.setSelectedMovie} />
             </Col>
-          ))}
+            :
+            movies.map(movie => (
+              // <Navigation user={user} history={history} onSignOut={signState => { this.signOut(signState); }} />
+              <Col md={3}>
+                <MovieCard key={movie._id} movie={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie); }} />
+              </Col>
+            ))
+          }
+        </Row>
+      </Router>
 
-        }
-      </Row>
     );
   }
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import config from '../../config';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export function LoginView(props) {
 
@@ -17,6 +19,8 @@ export function LoginView(props) {
     })
       .then(response => {
         const data = response.data;
+        // When a user logs in, the props onLoggedIn(data) is passed to the LoginView 
+        //and triggers the function onLoggedIn(authData) in the MainView
         props.onLoggedIn(data);
       })
       .catch(e => {
@@ -33,20 +37,20 @@ export function LoginView(props) {
   // }
 
   return (
-    <form>
-      <label>
-        Username:
-          <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </label>
-      <span>
-        <button type="submit" onClick={handleSubmit}>Submit</button>
-        <button type="secondary" onClick={props.toggleRegister}>Register</button>
-      </span>
-    </form>
+    <Form>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control type="text" value={username} onChange={e => setUsername(e.target.value)} />
+      </Form.Group>
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
+      </Form.Group>
+
+      <Button type="submit" onClick={handleSubmit}>Submit</Button>
+      <Button type="secondary" onClick={props.toggleRegister}>Register</Button>
+
+    </Form>
   )
 
 
