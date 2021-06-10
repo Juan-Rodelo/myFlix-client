@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import config from '../../config';
 
 
 export function RegistrationView(props) {
@@ -9,11 +11,29 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
+
   const handleSubmit = (e) => {
+    //prevents refresh/reload,
     e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onRegister(username);
-  }
+    axios.post(`${config.API_URL}/login`, {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday, birthday,
+    })
+      .then(response => {
+        const data = response.data;
+        console.log(data);
+        // the second argument '_self' is necessary so that the page will open in the current tab
+        window.open('/', '_self');
+        // When a user logs in, the props onRegister(data) is passed to the LoginView 
+        //and triggers the function onRegister(authData) in the MainView
+        // props.onRegister(data);
+      })
+      .catch(e => {
+        console.log('no such user')
+      });
+  };
 
 
   return (
@@ -43,6 +63,6 @@ export function RegistrationView(props) {
 
 }
 
-RegistrationView.propTypes = {
-  onRegister: PropTypes.func.isRequired
-};
+// RegistrationView.propTypes = {
+//   onRegister: PropTypes.func.isRequired
+// };
