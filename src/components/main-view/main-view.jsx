@@ -9,6 +9,8 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { DirectorView } from '../director-view/director-view';
 import { Navigation } from '../navigation/navigation';
 import { ProfileView } from '../profile-view/profile-view';
+import { GenreView } from '../genre-view/genre-view';
+
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -29,7 +31,6 @@ class MainView extends React.Component {
       //The UI is a function of its state that now is null.
       user: null,
       userData: null,
-      token: null
       // register: null
     }
   }
@@ -79,13 +80,13 @@ class MainView extends React.Component {
     });
   }
 
-  newUser(newData) {
-    localStorage.setItem('user', newData.Username);
-    this.setState({
-      userData: newData,
-      user: newData.Username
-    });
-  }
+  // newUser(newData) {
+  //   localStorage.setItem('user', newData.Username);
+  //   this.setState({
+  //     userData: newData,
+  //     user: newData.Username
+  //   });
+  // }
 
 
   getMovies(token) {
@@ -163,11 +164,10 @@ class MainView extends React.Component {
             if (!user) return <Col>
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
-            if (movies.length === 0) return <div className="main-view" />
-
+            if (movies.length === 0) return <div className="main-view">movies are loading. . . </div>
             return (
               <>
-                <Navigation onSignOut={outState => { this.signOut(outState); }} />
+                <Navigation userData={userData} user={user} onSignOut={outState => { this.signOut(outState); }} />
                 {movies.map(m => (
                   <Col md={3} key={m._id}>
                     <MovieCard movie={m} userData={userData} user={user} token={token} onGetUser={() => { this.getUser(token, user); }} />
@@ -231,9 +231,9 @@ class MainView extends React.Component {
               <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
             </Col>
             if (movies.length === 0) return <div className="main-view" />;
-
+            if (!userData) return <div>Loading</div>
             return <Col md={8}>
-              <ProfileView user={user} token={token} history={history} userData={userData} onNewUser={newData => { this.newUser(newData); }} onSignOut={signState => { this.signOut(signState); }} />
+              <ProfileView user={user} favoriteMovies={movies.filter(m => userData.FavoriteMovies.includes(m._id))} token={token} history={history} getUser={() => this.getUser(user, token)} userData={userData} onNewUser={newData => { this.newUser(newData); }} onSignOut={signState => { this.signOut(signState); }} />
             </Col>
           }} />
 
@@ -248,6 +248,7 @@ class MainView extends React.Component {
 
 
         </Row>
+
       </Router>
 
     );

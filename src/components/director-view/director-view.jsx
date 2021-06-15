@@ -12,15 +12,15 @@ export class DirectorView extends React.Component {
       <div>
         <div>
           <span>{directorData.Name}</span>
-          {/* <span>Juan</span> */}
         </div>
         <div>
           <span>{directorData.Bio}</span>
-          {/* <span>Juan</span> */}
         </div>
         <div>
-          <span>{directorData.Birth}</span>
-          {/* <span>Juan</span> */}
+          <span>Birth:{directorData.Birth}</span>
+        </div>
+        <div>
+          <span>Death:{directorData.Death}</span>
         </div>
         <button onClick={(e) => {
           console.log(e);

@@ -15,11 +15,11 @@ export function RegistrationView(props) {
   const handleSubmit = (e) => {
     //prevents refresh/reload,
     e.preventDefault();
-    axios.post(`${config.API_URL}/login`, {
+    axios.post(`${config.API_URL}/users`, {
       Username: username,
       Password: password,
       Email: email,
-      Birthday, birthday,
+      // Birthday: birthday,
     })
       .then(response => {
         const data = response.data;
@@ -50,10 +50,10 @@ export function RegistrationView(props) {
         Email:
           <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
       </label>
-      <label>
+      {/* <label>
         Birthday:
           <input type="text" value={birthday} onChange={e => setBirthday(e.target.value)} />
-      </label>
+      </label> */}
       <span>
         <button type="submit" onClick={handleSubmit}>Submit</button>
       </span>
