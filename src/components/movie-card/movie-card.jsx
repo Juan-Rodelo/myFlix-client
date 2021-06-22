@@ -5,8 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import config from '../../config';
-
-
+import './movie-card.scss';
 
 
 
@@ -46,27 +45,28 @@ export class MovieCard extends React.Component {
 
     return (
 
-      <Card>
+      <Card className="card-space">
 
         <Link to={`/movies/${movie._id}`}>
           <Card.Img className="cardImage" variant="top" src={movie.ImagePath} />
         </Link>
         <Card.Body>
 
-          <Card.Title>{movie.Title}</Card.Title>
+          <Card.Title className="card-title" >{movie.Title}</Card.Title>
           <Link to={`/directors/${movie.Director.Name}`}>
             <Card.Title>{movie.Director.Name}</Card.Title>
           </Link>
-          <Card.Text>{movie.Description.slice(0, 140)}</Card.Text>
+          <Card.Text className="card-text">{movie.Description.slice(0, 140)}</Card.Text>
           {/* <div className="movie-card" onClick={() => { onMovieClick(movie) }}></div> */}
           <Link to={`/genre/${movie.Genre.Name}`}>
-            <Card.Text>{movie.Genre.Name}</Card.Text>
+            <Card.Text className="card-genre">{movie.Genre.Name}</Card.Text>
           </Link>
 
           <Button variant="primary" onClick={() => { this.favFilm(movie, userData, user, token); }}>Fav Film</Button>
         </Card.Body>
 
       </Card >
+
 
     )
   }

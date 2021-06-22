@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { connect } from 'react-redux';
+
 
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -10,6 +12,10 @@ import { DirectorView } from '../director-view/director-view';
 import { Navigation } from '../navigation/navigation';
 import { ProfileView } from '../profile-view/profile-view';
 import { GenreView } from '../genre-view/genre-view';
+import { setMovies } from '../../actions/actions';
+import MoviesList from '../movies-list/movies-list';
+
+
 
 
 import Row from 'react-bootstrap/Row';
@@ -27,8 +33,7 @@ class MainView extends React.Component {
     //calls the constructor of the parent class. Need to call super if they are subclasses.
     super();
     this.state = {
-      movies: [],
-      //The UI is a function of its state that now is null.
+      // movies: [],
       user: null,
       userData: null,
       // register: null
@@ -57,6 +62,8 @@ class MainView extends React.Component {
       this.getUser(accessToken, userToken);
     }
   }
+
+
 
   onLoggedIn(authData) {
     console.log(authData);
@@ -92,9 +99,10 @@ class MainView extends React.Component {
   getMovies(token) {
     axios.get(`${config.API_URL}/movies`, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => {
-        this.setState({
-          movies: response.data
-        });
+        // this.setState({
+        //   movies: response.data
+        // });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -148,7 +156,10 @@ class MainView extends React.Component {
 
 
   render() {
-    const { movies, user, token, userData } = this.state;
+    const { user, token, userData } = this.state;
+    const { movies } = this.props;
+
+
 
     // if (movies.length === 0) return <div className="main-view"></div>;
     // /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are 
@@ -167,13 +178,16 @@ class MainView extends React.Component {
             if (movies.length === 0) return <div className="main-view">movies are loading. . . </div>
             return (
               <>
+                {/* <Col md={3}> */}
                 <Navigation userData={userData} user={user} onSignOut={outState => { this.signOut(outState); }} />
-                {movies.map(m => (
-                  <Col md={3} key={m._id}>
-                    <MovieCard movie={m} userData={userData} user={user} token={token} onGetUser={() => { this.getUser(token, user); }} />
-                  </Col>
 
-                ))}
+                <MoviesList movies={movies} userData={userData} user={user} token={token} onGetUser={() => { this.getUser(token, user); }} />
+                {/* {movies.map(m => (
+                  <Col md={3} key={m._id}>
+                    <MovieCard movie={m} userData={userData} user={user} token={token} onGetUser={() => { this.getUser(token, user); }} /> */}
+                {/* </Col> */}
+
+                {/* ))} */}
               </>
             )
           }} />
@@ -251,11 +265,17 @@ class MainView extends React.Component {
 
       </Router>
 
+
+
     );
   }
+
+
+}
+
+let mapStateToProps = state => {
+  return { movies: state.movies }
 }
 
 
-
-
-export default MainView;
+export default connect(mapStateToProps, { setMovies })(MainView);

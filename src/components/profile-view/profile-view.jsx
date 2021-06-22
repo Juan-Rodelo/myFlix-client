@@ -113,7 +113,7 @@ export function ProfileView(props) {
                   <Link to={`/directors/${movie.Director.Name}`}>
                     <Card.Title>{movie.Director.Name}</Card.Title>
                   </Link>
-                  <Card.Text>{movie.Description.slice(0, 140)}</Card.Text>
+                  <Card.Text className="card-text">{movie.Description.slice(0, 140)}</Card.Text>
                   {/* <div className="movie-card" onClick={() => { onMovieClick(movie) }}></div> */}
                   <Button variant="primary" onClick={() => { this.deleteFilm(movie, userData, user, token); }}>Delete Fav</Button>
 
