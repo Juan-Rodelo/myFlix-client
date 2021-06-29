@@ -1,3 +1,7 @@
+.card-space{
+margin-top: 40px;
+}
+
 .card-title{
 font-family: 'Oswald', sans-serif;
 color: #686767;
@@ -16,4 +20,14 @@ font-size: 100px;
   font-size: 18px;
   font-family: 'Oswald', sans-serif;
 
+}
+
+.heart{
+  cursor: pointer;
+  filter: grayscale(100%);
+  text-align: right;
+}
+
+.heart:hover{
+  filter: grayscale(0%);
 }

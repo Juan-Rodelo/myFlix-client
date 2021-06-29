@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import config from '../../config';
+import './movie-view.scss';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
@@ -37,39 +40,38 @@ export class MovieView extends React.Component {
     }
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} />
-        </div>
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
+      <>
+        <Row className="justify-content-md-center">
+          <Col md={4} sl={10}>
+            <div className="movie-view">
+              <div className="movie-view-poster">
+                <img src={movie.ImagePath} />
+              </div>
+              <div className="movie-title">
+                <span className="value">{movie.Title}</span>
+              </div>
+              <div className="movie-description">
+                <span className="value">{movie.Description}</span>
+              </div>
+              <div className="movie-genre">
+                <Link to={`/genre/${movie.Genre.Name}`}>
+                  <span className="value">{movie.Genre.Name}</span>
+                </Link>
+              </div>
 
-        <div className="movie-genre">
-          <span className="label">Genre: </span>
-          <Link to={`/genre/${movie.Genre.Name}`}>
-            <span className="value">{movie.Genre.Name}</span>
-          </Link>
-        </div>
+              <button onClick={(e) => {
+                console.log(e);
+                e.preventDefault();
+                onBackClick()
+              }}>Back</button>
 
-        <button onClick={(e) => {
-          console.log(e);
-          e.preventDefault();
-          onBackClick()
-        }}>Back</button>
-
-        <button onClick={() => {
-          favFilm(movie, userData, user, token);
-        }}>Favourite</button>
-
-
-
-      </div >
+              <button onClick={() => {
+                favFilm(movie, userData, user, token);
+              }}>Favourite</button>
+            </div >
+          </Col>
+        </Row>
+      </>
     );
   }
 }

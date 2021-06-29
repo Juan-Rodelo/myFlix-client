@@ -13,14 +13,15 @@ export class Navigation extends React.Component {
     return (
       <>
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">Film Spelunker</Navbar.Brand>
+          <Link to={`/`}>
+            <Navbar.Brand href="#home">Film Spelunker</Navbar.Brand>
+          </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link href="#link1" onClick={() => { onSignOut(null) }}><span>SignOut</span></Nav.Link>
               <Link to={`/users/${user}`}>
                 <Button variant="dark">Profile</Button>
-
               </Link>
             </Nav>
           </Navbar.Collapse>
